@@ -1,23 +1,23 @@
-import { useEffect } from 'react'
+import {  useState  } from 'react'
 import axios from 'axios'
 
 let authURL = null
 
 const Login = () => {
+    const [authURL, setAuthURL] = useState(null)
 
-    useEffect(() => {
-        axios.get('http://localhost:5000/get-auth-url').then((response) => {
-            authURL = response
-        }).catch((error) => {
-            console.log('--- Error in login - get url from server ---')
-            console.log(error)
-        })
-    }, [])
-
+    // Get authentication URL from server
+    {axios.get('http://localhost:5000/get-auth-url').then((response) => {
+        setAuthURL(response.data)
+        console.log(response.data)
+    }).catch((error) => {
+        console.log('--- Error in login - get url from server ---')
+        console.log(error)
+    })}
+    
     return (
         <>
-            <div>Login</div>
-            <div>{authURL}</div>
+            <a href={authURL}>Login With Spotify</a>
         </>
     )
 }
