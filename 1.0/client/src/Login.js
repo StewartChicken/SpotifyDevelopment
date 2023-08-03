@@ -1,25 +1,17 @@
-import {  useState  } from 'react'
-import axios from 'axios'
+import React from 'react'
 
-let authURL = null
+const client_id = 'ca63353e4ef242f2b3c7b9d843d0de1e'
+const response_type = 'code'
+const redirect_uri = 'http://localhost:3000'
 
-const Login = () => {
-    const [authURL, setAuthURL] = useState(null)
+const AUTH_URL = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=${response_type}&redirect_uri=${redirect_uri}
+                    &scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify
+                    %20user-read-playback-state%20user-modify-playback-state`
 
-    // Get authentication URL from server
-    {axios.get('http://localhost:5000/get-auth-url').then((response) => {
-        setAuthURL(response.data)
-        console.log(response.data)
-    }).catch((error) => {
-        console.log('--- Error in login - get url from server ---')
-        console.log(error)
-    })}
-    
-    return (
-        <>
-            <a href={authURL}>Login With Spotify</a>
-        </>
-    )
+export default function Login() {
+  return (
+    <div>
+        <a href={AUTH_URL}>Login With Spotify</a>
+    </div>
+  )
 }
-
-export default Login
