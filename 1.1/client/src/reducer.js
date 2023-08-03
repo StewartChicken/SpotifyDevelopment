@@ -1,5 +1,6 @@
 export const initialState = {
     user: null,
+    token: null,
     playlists: [],
     playing: false,
     item: null
@@ -15,10 +16,13 @@ const reducer = (state, action) => {
                 ...state,
                 user: action.user
             }
-        default:
+        case "SET_TOKEN":
             return{
-                ...state
+                ...state,
+                token: action.token
             }
+        default:
+            return state;
     }
 }
 

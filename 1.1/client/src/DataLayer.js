@@ -1,6 +1,6 @@
 import React, 
 {   createContext,
-    userContext,
+    useContext,
     useReducer } 
     from 'react'
 
@@ -14,4 +14,4 @@ export const DataLayer = ({ initialState,
         </DataLayerContext.Provider>
 )
 
-export const useDataLayerValue = () => userContext(DataLayerContext)
+export const useDataLayerValue = () => useContext(DataLayerContext)
