@@ -3,12 +3,18 @@
     align-items: center;
     color: grey;
     height: 40px;
-    cursor: pointer;
     transition: 150ms color ease-in;
 }
 
-.sidebarOption:hover {
+.sidebarFunctions {
+    display: flex;
+    align-items: center;
+    transition: 150ms color ease-in;
+}
+
+.sidebarFunctions:hover {
     color: white;
+    cursor: pointer;
 }
 
 .sidebarOption_icon {
@@ -16,8 +22,19 @@
     padding-right: 10px;
 }
 
-.sidebarOption > p {
-    margin-top: 10px;
+.sidebarOption > button {
+    display: flex;
+    color: grey;
+    background-color: #040404;
+    outline: none;
+    border: none;
+    align-items: center;
     margin-left: 20px;
     font-size: 14px;
+    transition: 0.15s color ease-in;
+}
+
+.sidebarOption > button:hover {
+    color: white;
+    cursor: pointer;
 }
