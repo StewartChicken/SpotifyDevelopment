@@ -2,17 +2,22 @@ import React from 'react'
 import "./SidebarOption.css"
 import { useDataLayerValue } from './DataLayer';
 
-function SidebarOption( { title, Icon } ) {
-  const [{ current_playlist }, dispatch] = useDataLayerValue()
+function SidebarOption( { title, Icon, spotify } ) {
+  const [{ current_playlist, playlist_map }, dispatch] = useDataLayerValue()
 
   const handlePlaylistClick = () => {
-    // TODO
+    spotify.getPlaylist(playlist_map[title]).then(response => {
+      dispatch({
+        type: "SET_CURRENT_PLAYLIST",
+        current_playlist: response,
+      })
+    })
   }
 
   return (
     <div className="sidebarOption">
 
-        {Icon ? 
+        {Icon ? // Top options : Home, Search, Library
         (
         <div className="sidebarFunctions">
           <Icon className="sidebarOption_icon"/>
@@ -20,7 +25,7 @@ function SidebarOption( { title, Icon } ) {
         </div>
         ) : (
 
-          <button onClick={handlePlaylistClick()}>{title}</button>
+          <button onClick={handlePlaylistClick}>{title}</button> // Playlist buttons
 
         )}
 

@@ -35,16 +35,34 @@ function App() {
       })
 
       spotify.getUserPlaylists().then((playlists) => {
+
+        // Loads all playlist information and inserts into data layer
         dispatch({
           type: "SET_PLAYLISTS",
           playlists: playlists,
         })
+
+        // Maps playlist names to their ids
+        const temp_playlist_map = {};
+
+        for (const playlist of playlists.items) {
+          spotify.getPlaylist(playlist.id).then(response => {
+            temp_playlist_map[response.name] = playlist.id
+          })
+        }
+
+        // Sends playlist name/id map to data layer
+        dispatch({
+          type: "SET_PLAYLIST_MAP",
+          playlist_map: temp_playlist_map,
+        })
+
       })
       
-      spotify.getPlaylist('37i9dQZEVXcDdWZ9Plyx6z').then(response => {
+      spotify.getPlaylist('4AfQl23I1AiZFljdtiIkqn').then(response => {
         dispatch({
-          type: "SET_DISCOVER_WEEKLY",
-          discover_weekly: response,
+          type: "SET_CURRENT_PLAYLIST",
+          current_playlist: response,
         })
       })
 

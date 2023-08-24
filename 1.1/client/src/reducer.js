@@ -2,8 +2,10 @@ export const initialState = {
     user: null,
     //token: null,
     playlists: [],
-    discover_weekly: null,
+    playlist_map: {},// Maps playlist names to their ids (hashmap)
     current_playlist: null,
+
+    to_be_deleted: {} // List of song names to be deleted - key value pairs are playlist_name: song_name
 }
 
 const reducer = (state, action) => {
@@ -26,10 +28,10 @@ const reducer = (state, action) => {
                 ...state,
                 playlists: action.playlists,
             }
-        case "SET_DISCOVER_WEEKLY":
+        case "SET_PLAYLIST_MAP":
             return{
                 ...state,
-                discover_weekly: action.discover_weekly, 
+                playlist_map: action.playlist_map,
             }
         case "SET_CURRENT_PLAYLIST":
             return{
